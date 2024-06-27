@@ -1,0 +1,20 @@
+package:
+  name: datastats
+  version: 0.1
+
+source:
+  path: .
+
+requirements:
+  build:
+    - python
+  run:
+    - python
+    - pandas
+    - scipy
+    - numpy
+
+about:
+  home: https://github.com/Berenger2/datastats
+  license: License
+  summary: Package to create dataframe from signals
