@@ -1,0 +1,14 @@
+aliases: []
+creation_timestamp: 1719489675104
+current_stage: None
+description: null
+last_updated_timestamp: 1719489675104
+name: wear-detection_xgb
+run_id: 2f1e4b5ca6784c27aad74d5e229fafa7
+run_link: null
+source: file:///workspaces/training_engine/mlruns/573907955727239957/2f1e4b5ca6784c27aad74d5e229fafa7/artifacts/model
+status: READY
+status_message: null
+storage_location: file:///workspaces/training_engine/mlruns/573907955727239957/2f1e4b5ca6784c27aad74d5e229fafa7/artifacts/model
+user_id: null
+version: 1

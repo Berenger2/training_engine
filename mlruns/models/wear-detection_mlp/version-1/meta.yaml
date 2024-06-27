@@ -1,0 +1,14 @@
+aliases: []
+creation_timestamp: 1719489873861
+current_stage: None
+description: null
+last_updated_timestamp: 1719489873861
+name: wear-detection_mlp
+run_id: e7d9aef2f57e4cffb039cfdadacd41d6
+run_link: null
+source: file:///workspaces/training_engine/mlruns/573907955727239957/e7d9aef2f57e4cffb039cfdadacd41d6/artifacts/model
+status: READY
+status_message: null
+storage_location: file:///workspaces/training_engine/mlruns/573907955727239957/e7d9aef2f57e4cffb039cfdadacd41d6/artifacts/model
+user_id: null
+version: 1
