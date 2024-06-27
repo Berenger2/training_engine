@@ -1,0 +1,3 @@
+[submodule "datastats"]
+	path = datastats
+	url = https://github.com/Berenger2/training_engine.git
