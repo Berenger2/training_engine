@@ -32,8 +32,6 @@ DIR_MLRUNS = config.get('Paths', 'DIR_MLRUNS')
 experiment_name = "wear_detection_exp"
 
 
-MLFLOW_TRACKING_URI = "sqlite:///tardy_engine.db"
-
 ## loading processed data
 with open(PATH_PROCESSED_DATA, 'rb') as file:
     print("\t \t Loading processed data =========>>>>>>>>")
@@ -41,7 +39,7 @@ with open(PATH_PROCESSED_DATA, 'rb') as file:
 print(X_train.head())
 
 # Define a location for tracking experiments different from the default one
-mlflow.set_tracking_uri(MLFLOW_TRACKING_URI)
+mlflow.set_tracking_uri("file:" + os.path.abspath(DIR_MLRUNS))
 mlflow.sklearn.autolog(disable=True)
 # Set up an experiment
 experiment_name = "Wear Detection"
