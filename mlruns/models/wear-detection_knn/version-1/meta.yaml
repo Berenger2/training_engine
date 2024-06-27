@@ -1,0 +1,14 @@
+aliases: []
+creation_timestamp: 1719489077537
+current_stage: None
+description: null
+last_updated_timestamp: 1719489077537
+name: wear-detection_knn
+run_id: 9108aaccc0db47a98f318cca69a33e36
+run_link: null
+source: file:///workspaces/training_engine/mlruns/573907955727239957/9108aaccc0db47a98f318cca69a33e36/artifacts/model
+status: READY
+status_message: null
+storage_location: file:///workspaces/training_engine/mlruns/573907955727239957/9108aaccc0db47a98f318cca69a33e36/artifacts/model
+user_id: null
+version: 1
