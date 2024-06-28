@@ -16,12 +16,8 @@ from xgboost import XGBClassifier
 from sklearn.pipeline import Pipeline
 from sklearn.metrics import accuracy_score, precision_score, f1_score, confusion_matrix
 
-
 import mlflow
 import pickle
-
-
-
 
 config = configparser.ConfigParser()
 config.read('config.ini')
@@ -31,8 +27,7 @@ PATH_PROCESSED_SCHEMA = config.get('Paths', 'PATH_PROCESSED_SCHEMA')
 DIR_MLRUNS = config.get('Paths', 'DIR_MLRUNS')
 experiment_name = "wear_detection_exp"
 
-
-MLFLOW_TRACKING_URI = "sqlite:///tardy_engine.db"
+MLFLOW_TRACKING_URI= config.get('Default', 'MLFLOW_TRACKING_URI')
 
 ## loading processed data
 with open(PATH_PROCESSED_DATA, 'rb') as file:
@@ -96,7 +91,6 @@ gs_lgr = GridSearchCV(lgr_model, lgr_grid, cv=10)
 gs_xgb = GridSearchCV(xgb_model, xgb_grid, cv=10)
 gs_mlp = GridSearchCV(mlp_model, mlp_grid, cv=10)
 
-
 models_train = {
     "knn": gs_knn,
     "rdf": gs_rdf,
@@ -104,7 +98,6 @@ models_train = {
     "xgb":gs_xgb,
     "mlp":gs_mlp
 }
-
 
 def model_run(model, X_train, X_test, Y_train, Y_test):
     # Train the model on the train data
@@ -124,16 +117,12 @@ def model_run(model, X_train, X_test, Y_train, Y_test):
     mlflow.log_metrics(metrics)
     mlflow.log_artifact(PATH_PROCESSED_SCHEMA, model_path)
 
-
-
 run_id = []
 for run_name, mod in models_train.items():
     with mlflow.start_run(run_name=f'{run_name}', experiment_id=experiment_id) as run:
         # Train the model with the current values of hyperparameters, calculate scores, log with mlflow
         model_run(mod, X_train, X_test, Y_train, Y_test)
         run_id.append(run.info.run_id)
-
-
 
 runs = []
 for r_id in run_id:
@@ -146,7 +135,6 @@ for r_id in run_id:
 best_one = sorted(runs, key=lambda x: x['test_accuracy_score'], reverse = True)[0]
 print(best_one)
 
-
 best_run = mlflow.get_run(run_id=best_one["id"])
 target_directory = "../model"
 
@@ -156,10 +144,4 @@ if not os.path.exists(target_directory):
 
 # Define the source directory of the model
 model_directory = best_run.info.artifact_uri+"/model"
-# Copy or move the model files to the target directory
-for root, dirs, files in os.walk(model_directory.split("//")[1]):
-    for file in files:
-        source_path = os.path.join(root, file)
-        target_path = os.path.join(target_directory, file)
-        shutil.copy(source_path, target_path)
 print("Model saved !")
